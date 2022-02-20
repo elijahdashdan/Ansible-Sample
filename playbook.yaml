@@ -5,7 +5,7 @@
   var:
    pkgname: nginx
   vars_files:
-   - ./ansible.yml
+   - ./ansible.yaml
   tasks:
   - name: Apt Update
     become: true
