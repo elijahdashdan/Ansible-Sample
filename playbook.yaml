@@ -13,8 +13,13 @@
      upgrade: yes
      update_cache: yes
      cache_valid_time: 86400 #One day
-  - name: Install "{{pkgname}}"
-    apt: pkg="{{pkgname}}" state=present
+  - name: Check if Apache is already installed
+    shell: dpkg -s apache2 | grep Status
+    register: apache2_is_installed  
+    failed_when: no
+  - name: Install "{{ pkgname }}"
+    apt: pkg="{{ pkgname }}" state=present
+    when: apache2_is_installed.rc == 1
     notify:
     - restart nginx
   - name: Enable Nginx during boot
