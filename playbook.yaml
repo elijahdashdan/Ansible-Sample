@@ -24,6 +24,8 @@
     - restart nginx
   - name: Enable Nginx during boot
     service: name=nginx state=started enabled=yes
+    tags:
+     - mytag1
   - name: Installing packages using loops
     apt: pkg={{ item }} state=present update_cache=yes
     with_items:
