@@ -2,6 +2,8 @@
   gather_facts: yes
   become: true
   become_user: root
+  var:
+   pkgname: nginx
   tasks:
   - name: Apt Update
     become: true
@@ -9,8 +11,8 @@
      upgrade: yes
      update_cache: yes
      cache_valid_time: 86400 #One day
-  - name: Install Nginx
-    apt: pkg=nginx state=present
+  - name: Install "{{pkgname}}"
+    apt: pkg="{{pkgname}}" state=present
     notify:
     - restart nginx
   - name: Enable Nginx during boot
