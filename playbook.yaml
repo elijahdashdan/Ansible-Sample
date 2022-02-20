@@ -24,6 +24,12 @@
     - restart nginx
   - name: Enable Nginx during boot
     service: name=nginx state=started enabled=yes
+  - name: Installing packages using loops
+    apt: pkg={{ item }} state=present update_cache=yes
+    with_items:
+      - sysstat
+      - htop
+      - git    
   handlers:
     - name: restart nginx
       service: name=nginx state=restarted                                                                                  20,5          All
