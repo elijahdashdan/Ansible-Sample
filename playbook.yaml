@@ -4,6 +4,8 @@
   become_user: root
   var:
    pkgname: nginx
+  vars_files:
+   - ./ansible.yml
   tasks:
   - name: Apt Update
     become: true
